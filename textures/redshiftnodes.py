@@ -3,7 +3,7 @@ import os
 
 import pymel.core as pc
 
-import iutil
+from nebula.common import util as iutil
 
 from .base import TextureNode
 from .setdict import SetDict

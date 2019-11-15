@@ -15,7 +15,7 @@ try:
 except:
     pass
 
-import iutil as util
+import nebula.common.util as util
 
 from .references import referenceInfo
 from .files import export, importScene, get_file_path

@@ -6,7 +6,7 @@ import os.path as op
 import pymel.core as pc
 import maya.cmds as cmds
 
-import iutil as util
+from nebula.common import util
 
 from .utils import newScene, newcomerObjs
 
@@ -26,7 +26,7 @@ def getReferences(loaded=False, unloaded=False):
 def addRef(path):
     namespace = os.path.basename(path)
     namespace = os.path.splitext(namespace)[0]
-    match = re.match('(.*)([-._]v\d+)(.*)', namespace)
+    match = re.match(r'(.*)([-._]v\d+)(.*)', namespace)
     if match:
         namespace = match.group(1) + match.group(3)
     return pc.createReference(path, namespace=namespace, mnc=False)
