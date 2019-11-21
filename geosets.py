@@ -200,6 +200,16 @@ def get_geo_sets(non_referenced_only=False, valid_only=False):
 
 
 def refs_compatible(ref1, ref2=None, feedback=False):
+    '''Given two references compare the contents of the two for cache
+    compatibility, if ref2 is not provided the current scene excluding
+    references will be used to compare with ref1
+
+    :type ref1: pymel.core.system.FileReference
+    :type ref2: pymel.core.system.FileReference or None
+    :type feedback: bool
+
+    :retval: bool
+    '''
     reasons = dict()
 
     try:
