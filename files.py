@@ -107,6 +107,7 @@ def openFile(filename, prompt=1, onError='rename', addRecent=False):
 def saveSceneAs(path):
     rename_scene(path)
     save_scene()
+    return path
 save_scene_as = saveSceneAs
 
 
@@ -115,7 +116,7 @@ def save_scene(ext=None):
         type = get_file_type()
     else:
         type = 'mayaBinary' if ext == '.mb' else 'mayaAscii'
-    cmds.file(save=True, type=type, force=True)
+    return cmds.file(save=True, type=type, force=True)
 
 
 def is_modified():
