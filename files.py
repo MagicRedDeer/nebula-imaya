@@ -38,6 +38,7 @@ def getFileInfo(key=None, all=False):
 
 def getFileType():
     return cmds.file(q=True, type=True)[0]
+get_file_type = getFileType
 
 
 def getExtension():
@@ -104,13 +105,17 @@ def openFile(filename, prompt=1, onError='rename', addRecent=False):
 
 
 def saveSceneAs(path):
-    cmds.file(rename=path)
-    cmds.file(save=True)
+    rename_scene(path)
+    save_scene()
+save_scene_as = saveSceneAs
 
 
-def save_scene(ext):
-    type = 'mayaBinary' if ext == '.mb' else 'mayaAscii'
-    cmds.file(save=True, type=type)
+def save_scene(ext=None):
+    if ext is None:
+        type = get_file_type()
+    else:
+        type = 'mayaBinary' if ext == '.mb' else 'mayaAscii'
+    cmds.file(save=True, type=type, force=True)
 
 
 def is_modified():
@@ -122,6 +127,10 @@ def get_file_path():
 
 
 def rename_scene(name):
+    if name.lower().endswith(".ma"):
+        cmds.file(type="mayaAscii")
+    elif name.lower().endswith(".mb"):
+        cmds.file(type="mayaBinary")
     cmds.file(rename=name)
 
 
