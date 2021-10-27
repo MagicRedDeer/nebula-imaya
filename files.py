@@ -38,7 +38,7 @@ def getFileInfo(key=None, all=False):
 
 def getFileType():
     return cmds.file(q=True, type=True)[0]
-get_file_type = getFileType
+get_file_type = getFileType  # noqa: E305
 
 
 def getExtension():
@@ -105,10 +105,10 @@ def openFile(filename, prompt=1, onError='rename', addRecent=False):
 
 
 def saveSceneAs(path):
-    rename_scene(path)
+    path = rename_scene(path)
     save_scene()
     return path
-save_scene_as = saveSceneAs
+save_scene_as = saveSceneAs  # noqa: E305
 
 
 def save_scene(ext=None):
@@ -127,12 +127,33 @@ def get_file_path():
     return cmds.file(q=True, location=True)
 
 
+def get_ext_from_type(file_type=None):
+    ext = ''
+    if file_type is None:
+        file_type = get_file_type()
+
+    if file_type == 'mayaAscii':
+        ext = '.ma'
+    elif file_type == 'mayaBinary':
+        ext = '.mb'
+
+    return ext
+
+
 def rename_scene(name):
     if name.lower().endswith(".ma"):
         cmds.file(type="mayaAscii")
     elif name.lower().endswith(".mb"):
         cmds.file(type="mayaBinary")
+    else:
+        _type = get_file_type()
+        path, ext = op.splitext(name)
+        if _type == 'mayaAscii':
+            name = '%s.ma' % path
+        elif _type == 'mayaBinary':
+            name = '%s.mb' % path
     cmds.file(rename=name)
+    return name
 
 
 @newcomerObjs
