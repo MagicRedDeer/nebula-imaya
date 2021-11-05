@@ -15,6 +15,8 @@ from .pathmap import *
 TextureMapper.register_texture_type(FileNode)
 TextureMapper.register_texture_type(RedshiftSprite)
 TextureMapper.register_texture_type(RedshiftNormalMap)
+TextureMapper.register_texture_type(RedshiftIESLight)
+TextureMapper.register_texture_type(RedshiftDomeLight)
 _mapper = TextureMapper()
 
 

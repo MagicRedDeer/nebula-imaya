@@ -9,7 +9,7 @@ from .base import TextureNode
 from .setdict import SetDict
 
 
-__all__ = ['RedshiftSprite', 'RedshiftNormalMap']
+__all__ = ['RedshiftSprite', 'RedshiftNormalMap', 'RedshiftDomeLight', 'RedshiftIESLight']
 
 
 class _RedshiftTextureNode(TextureNode):
@@ -71,3 +71,13 @@ class RedshiftSprite(_RedshiftTextureNode):
 
 class RedshiftNormalMap(_RedshiftTextureNode):
     _node_type = 'RedshiftNormalMap'
+
+
+class RedshiftDomeLight(_RedshiftTextureNode):
+    _node_type = 'RedshiftDomeLight'
+
+
+class RedshiftIESLight(TextureNode):
+    _node_type = 'RedshiftIESLight'
+    _path_read_attr = 'profile'
+    _path_write_attr = 'profile'
