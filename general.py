@@ -921,3 +921,9 @@ def getFrameRange():
 
 def setCurrentRenderLayer(layer):
     pc.editRenderLayerGlobals(crl=layer)
+
+def hasRenderSetup():
+    if maya_version() >= 2016.5:
+        if pc.mel.mayaHasRenderSetup():
+            return True
+    return False
